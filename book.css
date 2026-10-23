@@ -1,0 +1,294 @@
+/* ==========================================================================
+   book.css — the published edition only.
+   No apparatus. Nothing that speaks to a player.
+   ========================================================================== */
+
+.mode-book body {
+  font-size: 20px;
+  line-height: 1.72;
+}
+
+.mode-book .sheet,
+.mode-book .book-sheet {
+  max-width: 1180px;
+}
+
+/* the reading column */
+.mode-book .book-sheet {
+  padding-top: clamp(2rem, 5vw, 3.4rem);
+}
+
+.mode-book .prose-body {
+  max-width: 62ch;
+  margin: 0 auto;
+}
+.mode-book .prose-body p {
+  text-align: justify; hyphens: auto; -webkit-hyphens: auto;
+  margin: 0 0 1.1em; hanging-punctuation: first;
+}
+.mode-book .prose-body p + p { text-indent: 1.35em; margin-top: -.1em; }
+.mode-book .prose-body p.first::first-letter,
+.mode-book .chapter p.first::first-letter,
+.mode-book .note-manuscript .prose-body p:first-child::first-letter {
+  float: left; font-size: 3.9em; line-height: .82; padding: .06em .12em 0 0;
+  color: var(--wine);
+}
+
+/* front matter */
+.mode-book .frontis { max-width: 44rem; margin: 2.5rem auto; }
+.mode-book .frontis-note {
+  font-size: .92rem; color: var(--ink-faint); font-style: italic; max-width: 36rem;
+}
+.mode-book .frontis .toc { margin-top: 1.4rem; }
+
+.mode-book .note-manuscript {
+  max-width: 40rem; margin: 3rem auto; padding: 0;
+}
+.mode-book .note-manuscript h2 {
+  font-size: clamp(1.5rem, 3.2vw, 2rem); text-align: center; margin-bottom: 1.6rem;
+}
+.mode-book .note-manuscript .prose-body p { font-size: .98rem; }
+.mode-book .sig {
+  text-align: right; font-style: italic; color: var(--ink-faint);
+  font-size: .86rem; margin-top: 1.4rem;
+}
+
+/* plate heads */
+.mode-book .plate-head { text-align: center; margin-bottom: 2.5rem; }
+.mode-book .plate-head h1 {
+  font-size: clamp(2rem, 5vw, 3rem); margin: .5rem 0 .6rem;
+}
+.mode-book .plate-head .frontis-note { margin: 0 auto; }
+
+/* plates, printed not screenshotted */
+.mode-book .book-plate {
+  max-width: 56rem; margin: 3.5rem auto;
+}
+.mode-book .book-plate img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--rule);
+  box-shadow: 0 16px 40px -30px rgba(30,24,16,.8);
+}
+.mode-book .book-plate figcaption {
+  margin-top: 1rem; font-size: .82rem; color: var(--ink-faint);
+  font-style: italic; display: flex; gap: .8rem; align-items: baseline;
+}
+.mode-book .book-plate figcaption .pnum {
+  font-style: normal; font-size: .58rem; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--gold); flex: none;
+}
+
+/* the ledger, as an inventory rather than a stat sheet */
+.mode-book .book-ledger { max-width: 46rem; margin: 2rem auto; font-size: .95rem; }
+.mode-book .book-ledger caption {
+  text-align: center; padding-bottom: 1.4rem; font-size: .64rem;
+  letter-spacing: .26em;
+}
+.mode-book .book-ledger th { width: 12rem; border-bottom: 1px solid rgba(125,92,32,.16); }
+.mode-book .book-ledger td { border-bottom: 1px solid rgba(125,92,32,.16); }
+.mode-book .book-ledger td:last-child,
+.mode-book .book-ledger .q {
+  text-align: right; font-variant-numeric: tabular-nums;
+  color: var(--ink-faint); font-size: .86rem; white-space: nowrap;
+}
+
+/* people */
+.mode-book .people {
+  display: grid; gap: 2.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  max-width: 52rem; margin: 2.5rem auto;
+}
+.mode-book .person {
+  border-top: 1px solid var(--rule); padding-top: 1.1rem;
+}
+.mode-book .person h3 { font-size: 1.12rem; margin-bottom: .2rem; }
+.mode-book .person .role {
+  font-size: .58rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold-deep); margin-bottom: .7rem;
+}
+.mode-book .person p { font-size: .9rem; line-height: 1.62; margin: 0; color: var(--ink-soft); }
+
+/* chapters */
+.mode-book .chapter-head { text-align: center; margin-bottom: 3rem; }
+.mode-book .chapter-head h1 { font-size: clamp(1.9rem, 4.6vw, 2.9rem); margin: .4rem 0 .5rem; }
+.mode-book .chapter { max-width: 62ch; }
+
+/* running head: quiet */
+.mode-book .topbar { background: rgba(240,230,205,.96); }
+.mode-book .topbar nav a { letter-spacing: .2em; }
+
+@media (max-width: 780px) {
+  .mode-book body { font-size: 18px; }
+  .mode-book .prose-body p { text-align: left; hyphens: none; }
+  .mode-book .book-ledger th { width: auto; }
+}
+
+/* the first leaves are another hand */
+.mode-book .hand-label {
+  float: right; clear: right; width: 12rem; margin: 0 -15.5rem 1rem 0;
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gold-deep); text-align: right;
+  border-bottom: 1px solid var(--rule); padding-bottom: .5rem;
+}
+@media (max-width: 1119px) {
+  .mode-book .hand-label { float: none; width: auto; margin: 0 0 1.6rem; text-align: left; }
+}
+.mode-book .endnote {
+  margin: 2.2rem 0 4.5rem; padding-top: 1.1rem; border-top: 1px solid var(--rule);
+  font-style: italic; color: var(--ink-faint); font-size: .9rem; text-align: right;
+}
+.mode-book .pending-tag {
+  font-size: .5rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ink-faint); border: 1px solid var(--rule);
+  padding: .14rem .38rem; vertical-align: .18em; margin-left: .5rem; font-style: normal;
+}
+
+/* a single pager should fill the row, not half of it */
+.mode-book .pager a:only-child { grid-column: 1 / -1; }
+
+/* frontispiece portrait */
+.mode-book .portrait-frontis {
+  max-width: 24rem; margin: 0 auto 3rem; text-align: center;
+}
+.mode-book .portrait-frontis img {
+  width: 100%; height: auto; display: block; border: 1px solid var(--rule);
+  box-shadow: 0 18px 44px -32px rgba(30,24,16,.9);
+}
+.mode-book .portrait-frontis figcaption {
+  margin-top: .8rem; font-size: .8rem; color: var(--ink-faint);
+  font-style: italic; line-height: 1.5; display: block;
+}
+.mode-book .portrait-frontis .pnum {
+  display: block; font-style: normal; font-size: .56rem; letter-spacing: .26em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: .4rem;
+}
+.mode-book .book-plate figcaption span:last-child { line-height: 1.55; }
+
+/* ------------------------------------------------------------------------
+   Reading spread
+   The complaint was a column of eight words and a portrait the size of a
+   door. So: a wider page for the leaves that are documents, a smaller
+   frontispiece, and notes at the foot where they belong.
+   ------------------------------------------------------------------------ */
+.mode-book .book-sheet.wide { max-width: 1320px; }
+.mode-book .chapter { max-width: 64ch; }
+
+.mode-book .chapter.two-col {
+  /* fallback, if scripts are off: one honest column, a little wider */
+  max-width: 70ch;
+}
+
+/* ------------------------------------------------------------------------
+   The folio: two columns at a time, stacked, so a reader scrolls down a
+   leaf and finds the next one instead of being sent back up a gutter.
+   Built by script; the plain column above is what happens without it.
+   ------------------------------------------------------------------------ */
+.mode-book .folio { margin: 0 auto; }
+.mode-book .spread {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 3.8rem;
+  margin: 0 0 2.8rem;
+  position: relative;
+}
+.mode-book .spread + .spread { padding-top: 2.6rem; }
+.mode-book .spread + .spread::before {
+  content: "";
+  position: absolute; top: 0; left: 12%; right: 12%;
+  border-top: 1px solid var(--rule);
+}
+.mode-book .col {
+  height: var(--col-h, 640px);
+  overflow: hidden;
+  text-align: justify; hyphens: auto; -webkit-hyphens: auto;
+}
+.mode-book .col > p { margin: 0 0 1.05em; }
+.mode-book .col > p + p { text-indent: 1.35em; margin-top: -.1em; text-align: justify; }
+.mode-book .col > p.first::first-letter {
+  float: left; font-size: 3.9em; line-height: .82; padding: .06em .12em 0 0;
+  color: var(--wine);
+}
+.mode-book .col > p.log-line { margin: 0 0 1rem .2rem; }
+.mode-book .col > .sec-break { margin: 1.6rem 0 1.8rem; }
+@media (max-width: 1100px) {
+  .mode-book .book-sheet.wide .hand-label { border-top: none; }
+}
+
+/* the hand-label must not float into a gutter now full of text */
+.mode-book .book-sheet.wide .hand-label {
+  float: none; width: auto; margin: 0 auto 2.6rem; text-align: center;
+  max-width: 34rem; border-bottom: none; border-top: 1px solid var(--rule);
+  padding: .9rem 0 0;
+}
+
+
+/* frontispiece, at the size a frontispiece actually is */
+.mode-book .portrait-frontis { max-width: 15rem; margin: 0 auto 2.6rem; }
+.mode-book .portrait-frontis figcaption { font-size: .74rem; }
+
+/* scene breaks and the father's log */
+.mode-book .sec-break {
+  text-align: center; color: var(--gold); margin: 2.2rem 0 2.4rem;
+  font-size: .9rem; letter-spacing: .5em; break-inside: avoid;
+}
+.mode-book .col > p.log-line,
+.mode-book .prose-body p.log-line {
+  font-size: .93rem; line-height: 1.6; margin: 0 0 1rem 1.6rem;
+  text-indent: 0; text-align: left; color: var(--ink-soft); font-style: italic;
+  border-left: 1px solid var(--rule); padding-left: 1rem;
+}
+
+/* notes at the foot of the leaf */
+.mode-book .prose-body sup.fn { font-size: .62em; line-height: 0; }
+.mode-book .prose-body sup.fn a {
+  text-decoration: none; color: var(--gold-deep); padding: 0 .12em;
+}
+.mode-book .notes-block {
+  max-width: 56ch; margin: 3.4rem auto 0; padding-top: 1.6rem;
+  border-top: 1px solid var(--rule); text-align: left;
+}
+.mode-book .notes-block h2 {
+  font-size: .6rem; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--gold-deep); margin: 0 0 1rem; font-weight: 400;
+}
+.mode-book .notes-list {
+  list-style: decimal; margin: 0; padding-left: 1.6em;
+  font-size: .84rem; line-height: 1.62; color: var(--ink-soft);
+}
+.mode-book .notes-list li { margin-bottom: .85rem; padding-left: .2rem; }
+.mode-book .notes-list li::marker { color: var(--gold); font-size: .8em; }
+.mode-book .fn-term {
+  font-variant: small-caps; letter-spacing: .06em; color: var(--ink);
+}
+.mode-book .fn-back {
+  text-decoration: none; color: var(--gold); font-size: .9em;
+  margin-left: .15em;
+}
+
+/* one leaf at a time */
+html.folio-mode { scroll-snap-type: y proximity; }
+.mode-book .folio .spread { scroll-snap-align: start; scroll-margin-top: 4.6rem; }
+@media (max-width: 1099px) {
+  html.folio-mode { scroll-snap-type: none; }
+}
+
+/* the caption may be wider than the picture */
+.mode-book .portrait-frontis { max-width: 21rem; }
+.mode-book .portrait-frontis img { max-width: 15rem; margin: 0 auto; }
+
+/* a portrait plate sits on the page like a picture, not like a wall */
+.mode-book .book-plate.portrait { max-width: 46rem; margin-left: auto; margin-right: auto; }
+
+/* the gloss under a change of hand */
+.mode-book .hand-gloss {
+  display: block; margin-top: .5rem; font-size: .58rem; letter-spacing: .1em;
+  text-transform: none; font-style: italic; color: var(--ink-faint);
+  max-width: 30rem; margin-inline: auto; line-height: 1.7;
+}
+
+/* a two-word opening line is not a place for a drop cap */
+.mode-book .col > p.opener,
+.mode-book .prose-body > p.opener {
+  text-align: center; text-indent: 0; font-style: italic;
+  font-size: 1.22rem; margin: 0 0 1.7rem; color: var(--ink-soft);
+}
