@@ -38,7 +38,7 @@
   <p class="endnote">The text breaks off here, mid-sentence.</p>
   <section class="notes-block"><h2>Notes</h2><ol class="notes-list"><li id="fn-prologue-1"><span class="fn-term">Hayashiya (林屋)</span> A grove; a stand of trees. The Latin <em>silva</em> means the same, and the Greek <em>hyle</em> means the same again, which is how a family can change country three times and keep its name without ever keeping its language. The register's version is the third translation and the only one anyone wrote down. <a class="fn-back" href="#ref-prologue-1" title="back to the text">&#8617;</a></li><li id="fn-prologue-2"><span class="fn-term">Bactria</span> The country between the Hindu Kush and the river Oxus, today northern Afghanistan, conquered by Greek armies after Alexander and held by Greek kings for two centuries. It was the easternmost Greek state there has ever been, and it was already a memory when this family's road began. <a class="fn-back" href="#ref-prologue-2" title="back to the text">&#8617;</a></li><li id="fn-prologue-3"><span class="fn-term">“the year ten”</span> The writer reckons from the Seleucid era, as his family did, and does not name the era, because everyone he expected to read it knew. It corresponds to the last years before the Christian reckoning, when the last Greek kingdom in India was extinguished. He gives a round number and he is approximately right. <a class="fn-back" href="#ref-prologue-3" title="back to the text">&#8617;</a></li><li id="fn-prologue-4"><span class="fn-term">Menander</span> Menander I, called Soter, the most successful of the Greek kings of India; his coins circulated for centuries after his death, and one of them is in the chest described below. He is also the King Milinda of the Buddhist dialogue, which the writer of this leaf certainly never read. <a class="fn-back" href="#ref-prologue-4" title="back to the text">&#8617;</a></li><li id="fn-prologue-5"><span class="fn-term">The Tarim towns</span> The chain of oasis cities north and south of the Taklamakan desert, on the roads between China and the west: Kucha, Khotan, Turfan and their neighbours. They were the marketplaces of the silk road, and they were where a Greek family in flight from the south would have had work. <a class="fn-back" href="#ref-prologue-5" title="back to the text">&#8617;</a></li><li id="fn-prologue-6"><span class="fn-term">Hellene</span> The word the family uses for itself, and the word the translator has kept, rather than "Greek" or "pagan," neither of which means what the manuscript means. It is a word about descent and habit, not about belief; the religion described a few lines later is a chest, a fire and a list of names. <a class="fn-back" href="#ref-prologue-6" title="back to the text">&#8617;</a></li><li id="fn-prologue-7"><span class="fn-term">The eleventh month</span> In the reckoning of the court, which used a lunisolar calendar, the eleventh month fell in midwinter. The writer gives no day. The next leaf of the book does. <a class="fn-back" href="#ref-prologue-7" title="back to the text">&#8617;</a></li></ol></section>
   
-  <nav class="pager"><a class="next" href="chapter-1-the-storm.html"><span class="dir">Next →</span><span class="ttl">The Storm</span></a></nav>
+  <nav class="pager"><a class="next" href="vol-1/chapter-1-the-storm.html"><span class="dir">Next →</span><span class="ttl">The Storm</span></a></nav>
 </main>
 
 <script>
@@ -88,11 +88,36 @@
 
     newSpread();
     blocks.forEach(function (b) {
+      if (b.classList && b.classList.contains('plate-inline')) {
+        /* a plate wants the opening, not a column: close what is there,
+           set the plate across both columns, and start a fresh spread */
+        if (!folio) folio = document.createElement('div');
+        var sp = document.createElement('section');
+        sp.className = 'spread plate-spread';
+        sp.appendChild(b);
+        folio.appendChild(sp);
+        newSpread();
+        return;
+      }
       col.appendChild(b);
       if (col.scrollHeight <= col.clientHeight + 2) return;
       col.removeChild(b);
       if (cols.indexOf(col) === 0) { col = cols[1]; } else { newSpread(); }
       col.appendChild(b);
+    });
+
+    /* a plate interrupts a spread, and an interrupted spread leaves a column
+       half empty. Let the interrupted pages keep only the height their text
+       needs: printed pages are equal, but a page that stops early is honest. */
+    folio.querySelectorAll('.spread').forEach(function (sp) {
+      var next = sp.nextElementSibling;
+      if (!next || !next.classList.contains('plate-spread')) return;
+      Array.prototype.forEach.call(sp.children, function (c) {
+        if (!c.lastElementChild) { c.style.height = '0px'; return; }
+        var r = c.lastElementChild.getBoundingClientRect(),
+            t = c.getBoundingClientRect();
+        c.style.height = Math.max(0, r.bottom - t.top + 6) + 'px';
+      });
     });
 
     if (!folio.querySelector('p')) { restore(); return; }

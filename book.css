@@ -292,3 +292,101 @@ html.folio-mode { scroll-snap-type: y proximity; }
   text-align: center; text-indent: 0; font-style: italic;
   font-size: 1.22rem; margin: 0 0 1.7rem; color: var(--ink-soft);
 }
+
+/* ------------------------------------------------------------------ volumes */
+.mode-book .volume-cover .cover-inner { padding-top: clamp(3rem, 9vh, 7rem); }
+.mode-book .volume-cover h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); }
+
+.mode-book .part-head {
+  margin: 3.4rem 0 1.6rem; padding-top: 1.6rem;
+  border-top: 1px solid var(--rule); text-align: left;
+}
+.mode-book .part-head:first-of-type { margin-top: 1rem; }
+.mode-book .part-head .part-n {
+  font-size: .6rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--gold); display: block;
+}
+.mode-book .part-head h2 {
+  font-size: clamp(1.5rem, 3.2vw, 2rem); font-weight: 500; margin: .35rem 0 0;
+}
+.mode-book .part-head .part-years {
+  font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ink-faint); display: block; margin-top: .4rem;
+}
+
+/* a volume on the cover is a bigger thing than a chapter */
+.mode-book .toc-item.volume { padding-top: 1.6rem; padding-bottom: 1.4rem; }
+.mode-book .toc-item.volume .n { font-size: 2.9rem; }
+.mode-book .toc-item.volume h3 { font-size: 1.6rem; }
+
+/* a section head inside a long chapter.
+   The folio script moves paragraphs into .folio > .spread > .col at runtime, so
+   the selector has to cover both the source tree (.prose-body) and the laid-out
+   one (.folio). Inside a column it cannot span the spread; it is set as a quiet
+   italic line with a rule above, which is how a chronicle marks a new subject. */
+.mode-book .folio .section-head,
+.mode-book .prose-body .section-head {
+  font-size: clamp(1rem, 1.35vw, 1.16rem);
+  letter-spacing: .04em; font-weight: 500; font-style: italic;
+  color: var(--ink-soft); margin: 2.2rem 0 .5rem; padding: 0;
+  break-after: avoid; page-break-after: avoid;
+}
+.mode-book .folio .section-head::before,
+.mode-book .prose-body .section-head::before {
+  content: ""; display: block; width: 2.6rem; height: 1px;
+  background: var(--gold); opacity: .75; margin-bottom: .8rem;
+}
+
+/* ------------------------------------------------------------------------
+   Plates inside a chapter, for long chapters told in one voice.
+   The folio script gives each one an opening of its own: the columns stop,
+   the plate is set across the full measure, and the text resumes below it.
+   Height, not width, is what constrains a plate here — a portrait plate
+   sized by width would swallow two openings and break the reading.
+   ------------------------------------------------------------------------ */
+.mode-book .plate-inline {
+  margin: 3rem auto; max-width: 30rem; break-inside: avoid;
+}
+.mode-book .plate-inline img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--rule);
+  box-shadow: 0 18px 46px -34px rgba(30,24,16,.9);
+}
+.mode-book .plate-inline figcaption {
+  margin-top: .9rem; font-size: .8rem; color: var(--ink-faint);
+  font-style: italic; line-height: 1.5;
+  display: flex; gap: .8rem; align-items: baseline; text-align: left;
+}
+.mode-book .plate-inline figcaption .pnum {
+  font-style: normal; font-size: .56rem; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--gold); flex: none;
+  padding-top: .18em;
+}
+
+/* in the folio the plate takes the opening: the picture on the left of the
+   spread, the caption set in the margin like a printed note, so the plate uses
+   the whole opening instead of floating small in the middle of it */
+.mode-book .spread.plate-spread { display: block; }
+.mode-book .plate-spread .plate-inline {
+  margin: 1.2rem auto .6rem; max-width: none;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(13rem, 19rem);
+  gap: 2.6rem; align-items: start; justify-content: center;
+}
+.mode-book .plate-spread .plate-inline a { display: block; }
+.mode-book .plate-spread .plate-inline img {
+  /* a portrait plate is bounded by the height of the opening, a landscape one
+     by the width of its column: both rules have to be here, or a 3:2 plate
+     walks out of the spread and under its own caption */
+  max-height: calc(var(--col-h, 640px) - 4.5rem);
+  width: auto; max-width: 100%; height: auto; margin: 0;
+}
+.mode-book .plate-spread .plate-inline figcaption {
+  display: block; margin: 0; text-align: left; max-width: none;
+  padding-top: .3rem;
+}
+.mode-book .plate-spread .plate-inline figcaption .pnum {
+  display: block; margin-bottom: .55rem; padding-top: 0;
+}
+@media (max-width: 1100px) {
+  .mode-book .plate-spread .plate-inline { grid-template-columns: 1fr; gap: 1rem; }
+}
