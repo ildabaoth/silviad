@@ -6,12 +6,15 @@ folder paths exactly as they are.
 ## New files
 
 - `assets/illustrations/shiriko-and-shiina.jpg`
+- `assets/illustrations/tsunenao-portrait.jpg`
 
 ## Replaced files
 
 - `chapter-1-the-storm.html`
 - `house.html`
+- `index.html`
 - `plates.html`
+- `sources.html`
 
 ## Delete these
 
