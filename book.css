@@ -396,7 +396,12 @@ html.folio-mode { scroll-snap-type: y proximity; }
 .mode-book .col > .plate-inline { margin: .8rem 0 1rem; max-width: 100%; }
 .mode-book .col > .plate-inline a {
   display: flex; align-items: center; justify-content: center;
-  height: calc(var(--col-h, 660px) - 12.5rem);
+  height: calc(var(--col-h, 660px) - 14rem);
+}
+/* on a short screen the column is shorter but the caption is the same length,
+   so the frame has to give up more of it, not the same amount */
+@media (max-height: 820px) {
+  .mode-book .col > .plate-inline a { height: calc(var(--col-h, 660px) - 15.5rem); }
 }
 .mode-book .col > .plate-inline img {
   height: 100%; width: auto; max-width: 100%; max-height: none;
