@@ -715,3 +715,33 @@ small { font-size: .78em; }
   font-style: normal; font-size: .56rem; letter-spacing: .24em;
   text-transform: uppercase; color: var(--gold); flex: none;
 }
+
+/* ---------------------------------------------------------------------------
+   The arms as furniture.
+
+   `.rule-arms` is the meander of the house, broken at its centre by the sun:
+   the same device as the shield and the roundel, doing typographic work. It is
+   a background image, not an inline SVG, so the file is fetched once and every
+   rule on every page costs nothing after the first. `aspect-ratio` matches the
+   asset (780 x 26) so `background-size: 100% 100%` never distorts it.
+
+   Not on section heads: a column is about 300 px wide, which would draw the sun
+   in the middle of the rule four pixels across — a smudge, not a device. The
+   rule needs page measure, so it is used there and not here.
+   --------------------------------------------------------------------------- */
+.rule-arms {
+  aspect-ratio: 780 / 26; width: 100%; max-width: 780px;
+  margin: 2.6rem auto; background: url("assets/rule-arms.svg") center / 100% 100% no-repeat;
+}
+
+/* the arms on an appendix or frontispiece head */
+.plate-head .seal-sm { width: 104px; margin: 0 auto 1.3rem; opacity: .95; }
+.plate-head .seal-sm svg { display: block; width: 100%; height: auto; }
+.volume-arms { max-width: 158px; }
+
+/* The cover carries the arms as paint, not as a stamp. The painted SVG brings
+   its own offset shadow, so the CSS shadow is only a soft lift off the page —
+   two hard shadows stacked read as a printing error. */
+.cover .seal-painted { filter: drop-shadow(0 18px 44px rgba(0,0,0,.52)); }
+.cover .seal-painted svg, .cover .seal-painted img { display: block; margin: 0 auto; }
+.volume-arms.seal-painted { max-width: 210px; }

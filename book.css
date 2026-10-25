@@ -424,3 +424,40 @@ html.folio-mode { scroll-snap-type: y proximity; }
   margin: 1.6rem 0 .4rem; padding-top: .9rem;
   border-top: 1px solid var(--rule);
 }
+
+/* ---------------------------------------------------------------------------
+   The arms appendix. Six forms the house carries, then two the edition uses,
+   each with a caption that names the form and says what it is for. Nothing here
+   is a plate — a plate is a picture of something that happened; these are the
+   device itself.
+   --------------------------------------------------------------------------- */
+.mode-book .arms-sheet .plate-head { text-align: center; }
+.mode-book .arms-blazon { width: 300px; max-width: 70%; margin: 1rem auto 2.4rem; }
+.mode-book .arms-blazon svg { display: block; width: 100%; height: auto; }
+.mode-book .arms-grid {
+  display: grid; gap: 2.2rem 2rem; margin: 2.6rem auto 3rem; max-width: 52rem;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  align-items: start;
+}
+.mode-book .arm { margin: 0; text-align: center; }
+.mode-book .arm-art {
+  min-height: 7.5rem; display: flex; align-items: flex-end; justify-content: center;
+  margin-bottom: .9rem;
+}
+.mode-book .arm-art svg { display: block; width: auto; max-width: 100%; height: auto;
+  max-height: 15rem; }
+.mode-book .arm figcaption {
+  font-size: .8rem; line-height: 1.55; color: var(--ink-soft); text-align: left;
+}
+.mode-book .arm-name {
+  display: block; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold-deep); margin-bottom: .4rem;
+}
+/* the two forms the edition uses rather than the house: page furniture, so they
+   get page measure and not a grid cell */
+.mode-book .arms-furniture { margin: 3rem auto 0; max-width: 100%; }
+.mode-book .arms-furniture .arm { margin: 2.6rem auto 0; }
+.mode-book .arms-furniture .arm-art { min-height: 0; }
+.mode-book .arms-furniture .arm-art svg { max-width: 100%; max-height: none; margin: 0 auto; }
+.mode-book .arms-furniture .arm:first-child .arm-art svg { max-width: 140px; }
+.mode-book .arms-furniture figcaption { max-width: 34rem; margin: .9rem auto 0; text-align: center; }
